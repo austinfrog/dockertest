@@ -16,7 +16,6 @@ jobs:
         env:
           IMAGE_NAME: jonw123test.jfrog.io/docker-local/emtech-supply-chain-evals-jfrog:${{ github.run_number }}
         run: |
-          cd vendor/jfrog
           jf config show
           jf docker build -t $IMAGE_NAME .
           jf docker push $IMAGE_NAME
