@@ -11,9 +11,10 @@ jobs:
         env:
           JF_URL: ${{ secrets.JF_URL }}
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          JF_USER: austinf
       - name: Build Tag and push Docker Image
         env:
-          IMAGE_NAME: yeahbaby.jfrog.io/yeahbaby-docker/emtech-supply-chain-evals-jfrog:${{ github.run_number }}
+          IMAGE_NAME: jonw123test.jfrog.io/docker-local/emtech-supply-chain-evals-jfrog:${{ github.run_number }}
         run: |
           cd vendor/jfrog
           jf config show
