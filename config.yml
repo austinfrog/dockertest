@@ -1,23 +1,24 @@
 version: 2.1
 
-#orbs:
- # docker: circleci/docker@2.7.1  # Ensure this is the latest version
+orbs:
+  docker: circleci/docker@2.7.1  # Ensure this is the latest version
 
 jobs:
   build:
     docker:
-      - image: jonw123test.jfrog.io/docker-remote/cimg/android:stable
-        auth:
-          username: $ARTIFACTORY_USER
-          password: $ARTIFACTORY_PASSWORD
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - setup_remote_docker
 
-      # Your build steps
+      # Login to Artifactory Docker Registry
       - run:
-          name: Additional Commands
-          command: echo "Running additional commands post Docker image pull"
+          name: Login to Artifactory
+          command: |
+            echo "$ARTIFACTORY_PASSWORD" | docker login jonw123test.jfrog.io $ARTIFACTORY_URL --username $ARTIFACTORY_USER --password-stdin
 
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
+      # Pull the custom Docker image from Artifactory
+      - run:
+          name: Pull Docker Image from Artifactory
+          command: docker pull jonw123test.jfrog.io/docker-remote/cimg/android:latest
+
