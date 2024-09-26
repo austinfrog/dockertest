@@ -6,7 +6,10 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/base:stable
+      - image: jonw123test.jfrog.io/docker-remote/cimg/android:2021.08.1
+        auth:
+          username: austinf
+          password: $ARTIFACTORY_PASSWORD
     steps:
       - checkout
       - setup_remote_docker
