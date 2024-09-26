@@ -6,7 +6,10 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/base:stable
+      - image: jonw123test.jfrog.io/docker-remote/cimg/base:stable
+        auth:
+          username: $ARTIFACTORY_USER
+          password: $ARTIFACTORY_PASSWORD
     steps:
       - checkout
       - setup_remote_docker
