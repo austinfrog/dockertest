@@ -6,31 +6,10 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: jonw123test.jfrog.io/docker-remote/cimg/base:stable
+      - image: jonw123test.jfrog.io/docker-remote/cimg/android:stable
         auth:
           username: $ARTIFACTORY_USER
           password: $ARTIFACTORY_PASSWORD
-    steps:
-      - checkout
-      - setup_remote_docker
-
-      # Login to Artifactory Docker Registry
-      - run:
-          name: Login to Artifactory
-          command: |
-            echo "$ARTIFACTORY_PASSWORD" | docker login jonw123test.jfrog.io $ARTIFACTORY_URL --username $ARTIFACTORY_USER --password-stdin
-
-      # Pull the custom Docker image from Artifactory
-      - run:
-          name: Pull Docker Image from Artifactory
-          command: docker pull jonw123test.jfrog.io/docker-remote/nginx:latest
-
-      # Here, you can add commands to use the Docker image
-      - run:
-          name: Use Docker Image
-          command: |
-            # Example command, replace with actual commands to run inside the Docker image
-            docker run jonw123test.jfrog.io/docker-remote/nginx:latest
 
       # Your build steps
       - run:
