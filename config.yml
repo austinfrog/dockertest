@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
   docker: circleci/docker@2.7.1  # Ensure this is the latest version
-  
 jobs:
   build:
     docker:
