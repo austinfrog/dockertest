@@ -20,5 +20,5 @@ jobs:
       # Pull the custom Docker image from Artifactory
       - run:
           name: Pull Docker Image from Artifactory
-          command: docker pull jonw123test.jfrog.io/docker-remote/cimg/android:latest
+          command: docker pull jonw123test.jfrog.io/docker-remote/cimg/android
 
