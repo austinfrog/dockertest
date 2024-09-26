@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Login to Artifactory
           command: |
-            echo "$ARTIFACTORY_PASSWORD" | docker login $ARTIFACTORY_URL --username $ARTIFACTORY_USER --password-stdin
+            echo "$ARTIFACTORY_PASSWORD" | docker login jonw123test.jfrog.io $ARTIFACTORY_URL --username $ARTIFACTORY_USER --password-stdin
 
       # Pull the custom Docker image from Artifactory
       - run:
