@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  docker: circleci/docker@2.7.1  # Use the latest version of the Docker orb
+  docker: circleci/docker@2.7.1  # Ensure this is the latest version
 
 jobs:
   build:
@@ -17,12 +17,22 @@ jobs:
           command: |
             echo "$ARTIFACTORY_PASSWORD" | docker login $ARTIFACTORY_URL --username $ARTIFACTORY_USER --password-stdin
 
-      # Specify the custom Docker image from Artifactory as a primary container
-      - docker/check:
-          image: jonw123test.jfrog.io/docker-remote/nginx:latest
+      # Pull the custom Docker image from Artifactory
+      - run:
+          name: Pull Docker Image from Artifactory
+          command: docker pull jonw123test.jfrog.io/docker-remote/nginx:latest
+
+      # Here, you can add commands to use the Docker image
+      - run:
+          name: Use Docker Image
+          command: |
+            # Example command, replace with actual commands to run inside the Docker image
+            docker run jonw123test.jfrog.io/docker-remote/nginx:latest
 
       # Your build steps
-      - run: echo "Running commands inside the Docker image from Artifactory"
+      - run:
+          name: Additional Commands
+          command: echo "Running additional commands post Docker image pull"
 
 workflows:
   version: 2
