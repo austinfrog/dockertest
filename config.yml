@@ -1,0 +1,31 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@x.y  # Use the latest version of the Docker orb
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      # Login to Artifactory Docker Registry
+      - run:
+          name: Login to Artifactory
+          command: |
+            echo "$ARTIFACTORY_PASSWORD" | docker login $ARTIFACTORY_URL --username $ARTIFACTORY_USER --password-stdin
+
+      # Specify the custom Docker image from Artifactory as a primary container
+      - docker/check:
+          image: jonw123test.jfrog.io/docker-remote/nginx:latest
+
+      # Your build steps
+      - run: echo "Running commands inside the Docker image from Artifactory"
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
