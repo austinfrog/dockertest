@@ -22,4 +22,3 @@ jobs:
       - run:
           name: Pull Docker Image from Artifactory
           command: docker pull jonw123test.jfrog.io/docker-remote/cimg/android:2021.08.1
-
