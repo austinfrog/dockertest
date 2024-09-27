@@ -10,16 +10,4 @@ jobs:
         auth:
           username: austinf
           password: $ARTIFACTORY_PASSWORD
-    steps:
-      - checkout
-      - setup_remote_docker
-      # Login to Artifactory Docker Registry
-      - run:
-          name: Login to Artifactory
-          command: |
-            echo "$ARTIFACTORY_PASSWORD" | docker login jonw123test.jfrog.io $ARTIFACTORY_URL --username $ARTIFACTORY_USER --password-stdin
 
-      # Pull the custom Docker image from Artifactory
-      - run:
-          name: Pull Docker Image from Artifactory
-          command: docker pull jonw123test.jfrog.io/docker-remote/cimg/android:2021.08.1
