@@ -1,8 +1,8 @@
 version: 2.1
 
-
 orbs:
-  docker: circleci/docker@2.7.1  # Ensure this is the latest version
+  docker: circleci/docker@2.7.1  # Use the latest version of the Docker orb
+
 jobs:
   build:
     docker:
@@ -10,4 +10,14 @@ jobs:
         auth:
           username: austinf
           password: $ARTIFACTORY_PASSWORD
+    steps:  # Correctly adding the steps key
+      - checkout
+      - run:
+          name: Pull the custom Docker image from Artifactory
+          command: docker pull jonw123test.jfrog.io/docker-remote/cimg/android:2021.08.1
 
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
